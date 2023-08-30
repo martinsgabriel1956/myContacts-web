@@ -6,7 +6,7 @@ import defaultTheme from '../../assets/styles/themes/default';
 import { Header } from '../Header';
 import { Routes } from '../../Routes';
 
-export function App() {
+export default function App() {
   return (
     <BrowserRouter>
       <ThemeProvider theme={defaultTheme}>
