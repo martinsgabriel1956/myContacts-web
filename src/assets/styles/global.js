@@ -1,4 +1,4 @@
-import { createGlobalStyle } from 'styled-components';
+import { createGlobalStyle, css } from 'styled-components';
 
 export default createGlobalStyle`
   * {
@@ -9,7 +9,11 @@ export default createGlobalStyle`
   }
 
   body {
-    background: ${({ theme }) => theme.colors.background};
+    ${({ theme }) => css`
+      background: ${theme.colors.background};
+      color: ${theme.colors.gray[900]};
+    `}
+
     font-size: 16px;
   }
 

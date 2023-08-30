@@ -36,3 +36,71 @@ export const Header = styled.header`
     }
   }
 `;
+
+export const ListContainer = styled.div`
+  margin-top: 1.5rem;
+
+  button {
+    background: transparent;
+    border: 0;
+    display: flex;
+    align-items: center;
+    margin-bottom: 0.5rem;
+
+    span {
+      margin-right: 8px;
+      font-weight: bold;
+      color: ${({ theme }) => theme.colors.primary.main};
+    }
+  }
+`;
+
+export const Card = styled.div`
+  background: #FFF;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.04);
+  padding: 1rem;
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  & + & {
+    margin-top: 1rem;
+  }
+
+  .info {
+    .contact-name {
+      display: flex;
+      align-items: center;
+      column-gap: 0.5rem;
+
+      small {
+        ${({ theme }) => css`
+          background: ${theme.colors.primary.lighter};
+          color: ${theme.colors.primary.main};
+          font-weight: bold;
+          text-transform: uppercase;
+          padding: 0.25rem;
+          border-radius: 2px;
+        `}
+      }
+    }
+
+    span {
+      display: block;
+      font-size: 0.875rem;
+      color: ${({ theme }) => theme.colors.gray[200]};
+    }
+  }
+
+  .actions {
+    display: flex;
+    align-items: center;
+    column-gap: 0.5rem;
+
+    button {
+      background: transparent;
+      border: 0;
+    }
+  }
+`;
