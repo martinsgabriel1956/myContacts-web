@@ -14,14 +14,26 @@ export const Button = styled.button`
   ${({ theme }) => css`
     color: ${theme.colors.white};
     box-shadow: ${theme.shadow.primary};
-    background-color: ${theme.colors.primary.main};
+    background: ${theme.colors.primary.main};
 
     &:hover {
-      background-color: ${theme.colors.primary.light};
+      background: ${theme.colors.primary.light};
     }
 
     &:active {
-      background-color: ${theme.colors.primary.dark};
+      background: ${theme.colors.primary.dark};
+    }
+  `}
+
+  ${({ danger, theme }) => danger && css`
+    background: ${theme.colors.danger.main};
+
+    &:hover {
+      background: ${theme.colors.danger.light};
+    }
+
+    &:active {
+      background: ${theme.colors.danger.dark};
     }
   `}
 

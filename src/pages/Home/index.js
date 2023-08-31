@@ -52,7 +52,7 @@ export function Home() {
         </Card>
       </ListContainer>
 
-      <Modal />
+      <Modal danger />
     </Container>
   );
 }

@@ -12,6 +12,11 @@ export default {
       900: '#222',
       200: '#BCBCBC',
     },
+    danger: {
+      light: '#F97171',
+      main: '#FC5050',
+      dark: '#F63131',
+    },
   },
   shadow: {
     primary: '0 4px 10px rgba(0, 0, 0, 0.04)',

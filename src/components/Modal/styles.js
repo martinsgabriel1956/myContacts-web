@@ -22,10 +22,12 @@ export const Container = styled.div`
   ${({ theme }) => css`
     background: ${theme.colors.white};
     box-shadow: ${theme.shadow.primary};
+
   `}
 
   h1 {
     font-size: 1.375rem;
+    color: ${({ theme, danger }) => (danger ? theme.colors.danger.main : theme.colors.gray[900])};
   }
 
   p {
