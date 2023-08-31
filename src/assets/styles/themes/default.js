@@ -1,6 +1,7 @@
 export default {
   colors: {
     background: '#F6F5FC',
+    white: '#FFF',
     primary: {
       lighter: '#E0E3FF',
       light: '#6674F4',
@@ -11,5 +12,8 @@ export default {
       900: '#222',
       200: '#BCBCBC',
     },
+  },
+  shadow: {
+    primary: '0 4px 10px rgba(0, 0, 0, 0.04)',
   },
 };

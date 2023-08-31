@@ -12,7 +12,7 @@ export const InputSearchContainer = styled.div`
     border: none;
     border-radius: 25px;
     height: 3.125rem;
-    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.04);
+    box-shadow: ${({ theme }) => theme.shadow.primary};
     outline: 0;
     padding-inline: 1rem;
 
@@ -48,12 +48,9 @@ export const Header = styled.header`
 
       &:hover {
         background-color: ${theme.colors.primary.main};
+        color: ${theme.colors.white};
       }
     `}
-
-    &:hover {
-      color: #FFF;
-    }
   }
 `;
 
@@ -76,13 +73,17 @@ export const ListContainer = styled.div`
 `;
 
 export const Card = styled.div`
-  background: #FFF;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.04);
+
   padding: 1rem;
   border-radius: 4px;
   display: flex;
   align-items: center;
   justify-content: space-between;
+
+  ${({ theme }) => css`
+    background: ${theme.colors.white};
+    box-shadow: ${theme.shadow.primary};
+  `}
 
   & + & {
     margin-top: 1rem;
@@ -98,11 +99,12 @@ export const Card = styled.div`
         ${({ theme }) => css`
           background: ${theme.colors.primary.lighter};
           color: ${theme.colors.primary.main};
-          font-weight: bold;
-          text-transform: uppercase;
-          padding: 0.25rem;
-          border-radius: 2px;
         `}
+
+        font-weight: bold;
+        text-transform: uppercase;
+        padding: 0.25rem;
+        border-radius: 2px;
       }
     }
 
