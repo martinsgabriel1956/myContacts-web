@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types';
-import { useRef, useState } from 'react';
+import { useState } from 'react';
 import { Input } from '../Input';
 import { Select } from '../Input/Select';
 import { Button } from '../Button';
@@ -8,10 +8,23 @@ import { Form, ButtonContainer } from './styles';
 
 export function ContactForm({ buttonLabel }) {
   const [name, setName] = useState('');
-  const emailInputRef = useRef(null);
+  const [email, setEmail] = useState('');
+  const [phone, setPhone] = useState('');
+  const [category, setCategory] = useState('');
+
+  function handleSubmit(event) {
+    event.preventDefault();
+
+    console.log({
+      name,
+      email,
+      phone,
+      category,
+    });
+  }
 
   return (
-    <Form>
+    <Form onSubmit={handleSubmit}>
       <FormGroup>
         <Input
           name={name}
@@ -20,15 +33,28 @@ export function ContactForm({ buttonLabel }) {
         />
       </FormGroup>
       <FormGroup>
-        <Input defaultValue="johndoe@example.com" placeholder="E-mail" ref={emailInputRef} />
+        <Input
+          placeholder="E-mail"
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+        />
       </FormGroup>
       <FormGroup>
-        <Input placeholder="Telefone" />
+        <Input
+          placeholder="Telefone"
+          value={phone}
+          onChange={(e) => setPhone(e.target.value)}
+        />
       </FormGroup>
 
       <FormGroup>
-        <Select>
-          <option value="insta">Instagram</option>
+        <Select
+          value={category}
+          onChange={(e) => setCategory(e.target.value)}
+        >
+          <option value="">Categoria</option>
+          <option value="instagram">Instagram</option>
+          <option value="discord">Discord</option>
         </Select>
       </FormGroup>
 
