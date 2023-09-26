@@ -10,6 +10,7 @@ export const InputBase = styled.input`
   padding-inline: 1rem;
   font-size: 1rem;
   transition: outline 0.2s ease-in;
+  appearance: none;
 
   ${({ theme }) => css`
     background: ${theme.colors.white};
