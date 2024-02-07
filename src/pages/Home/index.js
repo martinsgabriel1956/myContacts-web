@@ -55,6 +55,11 @@ export function Home() {
   );
 }
 
-fetch('http://localhost:3000')
+fetch('http://localhost:3000/contacts', {
+  method: 'DELETE',
+  headers: new Headers({
+    'X-App-ID': '1234',
+  }),
+})
   .then((response) => console.log({ response }))
   .catch((error) => console.log({ error }));
