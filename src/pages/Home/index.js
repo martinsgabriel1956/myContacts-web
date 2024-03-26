@@ -9,26 +9,34 @@ import {
   ListHeader,
 } from './styles';
 
+import { Loader } from '../../components/Loader';
+
 import arrow from '../../assets/images/icons/arrow.svg';
 import edit from '../../assets/images/icons/edit.svg';
 import trash from '../../assets/images/icons/trash.svg';
+import { delay } from '../../utils/delay';
 
 export function Home() {
   const [contacts, setContacts] = useState([]);
   const [orderBy, setOrderBy] = useState('asc');
   const [searchTerm, setSearchTerm] = useState('');
+  const [isLoading, setIsLoading] = useState(true);
 
   const filteredContacts = useMemo(() => contacts.filter((contact) => (
     contact.name.toLowerCase().includes(searchTerm.toLowerCase())
   )), [contacts, searchTerm]);
 
   useEffect(() => {
+    setIsLoading(true);
+
     fetch(`http://localhost:3001/contacts?orderBy=${orderBy}`)
       .then(async (response) => {
+        await delay(500);
         const responseParsed = await response.json();
         setContacts(responseParsed);
       })
-      .catch((error) => console.log({ error }));
+      .catch((error) => console.log({ error }))
+      .finally(() => setIsLoading(false));
   }, [orderBy]);
 
   function handleToggleOrderBy() {
@@ -41,6 +49,7 @@ export function Home() {
 
   return (
     <Container>
+      <Loader isLoading={isLoading} />
       <InputSearchContainer>
         <input value={searchTerm} onChange={handleChangeSearchTerm} type="text" placeholder="Pesquise pelo nome" />
       </InputSearchContainer>
