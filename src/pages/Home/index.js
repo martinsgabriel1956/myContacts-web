@@ -33,7 +33,7 @@ export function Home() {
         const contactsList = await ContactsService.listContacts(orderBy);
         setContacts(contactsList);
       } catch (error) {
-        console.log({ error });
+        console.log({ errorName: error.name });
       } finally {
         setIsLoading(false);
       }
