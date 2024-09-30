@@ -160,10 +160,22 @@ export const EmptyListContainer = styled.div`
   p {
     color: ${({ theme }) => theme.colors.gray[200]};
     text-align: center;
-    margin: 0.5rem;
+    margin-top: 0.5rem;
 
     strong {
       color: ${({ theme }) => theme.colors.primary.main};
     }
+  }
+`;
+
+export const SearchNotFoundContainer = styled.div`
+  margin-top: 1rem;
+  display: flex;
+  align-items: flex-start;
+  gap: 1.5rem;
+
+  span {
+    color: ${({ theme }) => theme.colors.gray[200]};
+    word-break: break-word;
   }
 `;

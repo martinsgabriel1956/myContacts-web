@@ -13,6 +13,7 @@ import {
   ListHeader,
   ErrorContainer,
   EmptyListContainer,
+  SearchNotFoundContainer,
 } from './styles';
 
 import { Loader } from '../../components/Loader';
@@ -22,6 +23,7 @@ import edit from '../../assets/images/icons/edit.svg';
 import trash from '../../assets/images/icons/trash.svg';
 import sad from '../../assets/images/sad.svg';
 import emptyBox from '../../assets/images/emptyBox.svg';
+import magnifierQuestion from '../../assets/images/magnifier-question.svg';
 import ContactsService from '../../services/ContactsService';
 
 export function Home() {
@@ -120,6 +122,16 @@ export function Home() {
             </p>
           </EmptyListContainer>
         )}
+
+        {(contacts.length > 0 && filteredContacts.length < 1) && (
+          <SearchNotFoundContainer>
+            <img src={magnifierQuestion} alt="Icone de lupa com interrogação no meio vermelho" />
+            <span>
+              Nenhum resultado foi encontrado para <strong>&quot;{searchTerm}&quot</strong>;
+            </span>
+          </SearchNotFoundContainer>
+        )}
+
         {filteredContacts.length > 0 && (
         <ListHeader
           orderBy={orderBy}
