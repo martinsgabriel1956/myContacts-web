@@ -20,5 +20,4 @@ export const InputBase = styled.input`
       border: 2px solid ${theme.colors.primary.main};
     }
   `}
-
 `;
