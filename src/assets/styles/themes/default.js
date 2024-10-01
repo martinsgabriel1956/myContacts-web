@@ -18,6 +18,9 @@ export default {
       main: '#FC5050',
       dark: '#F63131',
     },
+    success: {
+      main: '#51CA73',
+    },
   },
   shadow: {
     primary: '0 4px 10px rgba(0, 0, 0, 0.04)',
