@@ -6,4 +6,9 @@ export const Input = styled(InputBase)`
     color: ${theme.colors.danger.main};
     border-color: ${theme.colors.danger.main} !important;
   `}
+
+  &[disabled] {
+    background-color: ${({ theme }) => theme.colors.gray[100]};
+    border: 1px solid ${({ theme }) => theme.colors.gray[200]};
+  }
 `;

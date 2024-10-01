@@ -7,5 +7,6 @@ export const Select = styled(InputBase).attrs({
   &[disabled] {
     background-color: ${({ theme }) => theme.colors.gray[100]};
     border: 1px solid ${({ theme }) => theme.colors.gray[200]};
+    opacity: 1;
   }
 `;

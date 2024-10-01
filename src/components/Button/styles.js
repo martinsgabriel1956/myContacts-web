@@ -1,6 +1,6 @@
 import styled, { css } from 'styled-components';
 
-export const Button = styled.button`
+export const StyledButton = styled.button`
   height: 3.25rem;
   border: 0;
   padding-inline: 1rem;
@@ -10,6 +10,9 @@ export const Button = styled.button`
   border-radius: 4px;
 
   transition: background 0.2s ease-in;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 
   ${({ theme }) => css`
     color: ${theme.colors.white};

@@ -17,6 +17,7 @@ export function ContactForm({ buttonLabel, onSubmit }) {
   const [categoryId, setCategoryId] = useState('');
   const [categories, setCategories] = useState([]);
   const [isLoadingCategories, setIsLoadingCategories] = useState(true);
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   const {
     getErrorMessageByFieldName, setError, removeError, errors,
@@ -61,15 +62,19 @@ export function ContactForm({ buttonLabel, onSubmit }) {
     setPhone(formatPhone(event.target.value));
   }
 
-  function handleSubmit(event) {
+  async function handleSubmit(event) {
     event.preventDefault();
 
-    onSubmit({
+    setIsSubmitting(true);
+
+    await onSubmit({
       name,
       email,
       phone: phone.replace(/\D/g, ''),
       category: categoryId,
     });
+
+    setIsSubmitting(false);
   }
 
   return (
@@ -82,6 +87,7 @@ export function ContactForm({ buttonLabel, onSubmit }) {
           placeholder="Nome *"
           onChange={handleNameChange}
           error={getErrorMessageByFieldName('name')}
+          disabled={isSubmitting}
         />
       </FormGroup>
       <FormGroup
@@ -93,6 +99,7 @@ export function ContactForm({ buttonLabel, onSubmit }) {
           value={email}
           onChange={handleEmailChange}
           error={getErrorMessageByFieldName('email')}
+          disabled={isSubmitting}
         />
       </FormGroup>
       <FormGroup>
@@ -101,6 +108,7 @@ export function ContactForm({ buttonLabel, onSubmit }) {
           value={phone}
           onChange={handlePhoneChange}
           maxLength={15}
+          disabled={isSubmitting}
         />
       </FormGroup>
 
@@ -108,7 +116,7 @@ export function ContactForm({ buttonLabel, onSubmit }) {
         <Select
           value={categoryId}
           onChange={(e) => setCategoryId(e.target.value)}
-          disabled={isLoadingCategories}
+          disabled={isLoadingCategories || isSubmitting}
         >
           <option value="">Sem Categoria</option>
           {categories.map((category) => (
@@ -121,6 +129,7 @@ export function ContactForm({ buttonLabel, onSubmit }) {
         <Button
           type="submit"
           disabled={!isFormValid}
+          isLoading={isSubmitting}
         >
           {buttonLabel}
         </Button>
