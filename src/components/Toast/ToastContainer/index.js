@@ -1,12 +1,35 @@
+import { useState } from 'react';
 import { Container } from './styles';
 import { ToastMessage } from '../ToastMessage';
 
 export function ToastContainer() {
+  const [messages] = useState([
+    {
+      id: Math.random(),
+      text: 'Default toast',
+      type: 'default',
+    },
+    {
+      id: Math.random(),
+      text: 'Danger toast',
+      type: 'danger',
+    },
+    {
+      id: Math.random(),
+      text: 'Success toast',
+      type: 'success',
+    },
+  ]);
+
   return (
     <Container>
-      <ToastMessage text="Default toast" />
-      <ToastMessage type="danger" text="Error toast" />
-      <ToastMessage type="success" text="Success toast" />
+      {messages.map((message) => (
+        <ToastMessage
+          key={message.id}
+          text={message.text}
+          type={message.type}
+        />
+      ))}
     </Container>
   );
 }
