@@ -70,11 +70,15 @@ export function ContactForm({ buttonLabel, onSubmit }) {
     await onSubmit({
       name,
       email,
-      phone: phone.replace(/\D/g, ''),
+      phone,
       category: categoryId,
     });
 
     setIsSubmitting(false);
+    setName('');
+    setEmail('');
+    setPhone('');
+    setCategoryId('');
   }
 
   return (
