@@ -26,7 +26,7 @@ export function EditContact() {
         setIsLoading(false);
         setContactName(contactData.name);
       } catch (error) {
-        // history.push('/');
+        history.push('/');
         toast({
           type: 'danger',
           text: 'Contato não encontrado!',
@@ -37,8 +37,28 @@ export function EditContact() {
     loadContact();
   }, [params.id, history]);
 
-  function handleSubmit() {
-    //
+  async function handleSubmit(formData) {
+    try {
+      const contact = {
+        name: formData.name,
+        email: formData.email,
+        phone: formData.phone,
+        category_id: formData.categoryId,
+      };
+
+      const contactData = await ContactsService.updateContact(params.id, contact);
+      setContactName(contactData.name);
+
+      toast({
+        type: 'success',
+        text: 'Contato editado com sucesso!',
+      });
+    } catch (error) {
+      toast({
+        type: 'danger',
+        text: 'Ocorreu um erro ao editar o contato.',
+      });
+    }
   }
 
   return (

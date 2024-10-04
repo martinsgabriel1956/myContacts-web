@@ -84,14 +84,14 @@ export const ContactForm = forwardRef(({ buttonLabel, onSubmit }, ref) => {
       name,
       email,
       phone,
-      category: categoryId,
+      categoryId,
     });
 
     setIsSubmitting(false);
-    setName('');
-    setEmail('');
-    setPhone('');
-    setCategoryId('');
+    // setName('');
+    // setEmail('');
+    // setPhone('');
+    // setCategoryId('');
   }
 
   return (
