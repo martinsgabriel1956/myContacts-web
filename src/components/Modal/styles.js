@@ -53,5 +53,9 @@ export const Footer = styled.footer`
     border: 0;
     font-size: 1rem;
     color: ${({ theme }) => theme.colors.gray[200]};
+
+    &[disabled] {
+      cursor: default;
+    }
   }
 `;
