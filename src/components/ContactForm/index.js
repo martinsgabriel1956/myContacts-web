@@ -34,6 +34,12 @@ export const ContactForm = forwardRef(({ buttonLabel, onSubmit }, ref) => {
       setPhone(formatPhone(contact.phone ?? ''));
       setCategoryId(contact.category_id ?? '');
     },
+    resetFields: () => {
+      setName('');
+      setEmail('');
+      setPhone('');
+      setCategoryId('');
+    },
   }));
 
   useEffect(() => {
@@ -51,8 +57,6 @@ export const ContactForm = forwardRef(({ buttonLabel, onSubmit }, ref) => {
 
   function handleNameChange(event) {
     setName(event.target.value);
-
-    console.log({ value: event.target.value });
 
     if (!event.target.value) {
       setError({ field: 'name', message: 'Nome é obrigatório.' });
@@ -88,10 +92,6 @@ export const ContactForm = forwardRef(({ buttonLabel, onSubmit }, ref) => {
     });
 
     setIsSubmitting(false);
-    // setName('');
-    // setEmail('');
-    // setPhone('');
-    // setCategoryId('');
   }
 
   return (
