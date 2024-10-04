@@ -18,6 +18,7 @@ import {
 
 import { Loader } from '../../components/Loader';
 import { Button } from '../../components/Button';
+import { Modal } from '../../components/Modal';
 import arrow from '../../assets/images/icons/arrow.svg';
 import edit from '../../assets/images/icons/edit.svg';
 import trash from '../../assets/images/icons/trash.svg';
@@ -69,6 +70,15 @@ export function Home() {
   return (
     <Container>
       <Loader isLoading={isLoading} />
+      <Modal
+        danger
+        title="Tem certeza que deseja remover o contato ?"
+        confirmLabel="Deletar"
+        onConfirm={() => alert('Deletar')}
+        onCancel={() => alert('Cancelar')}
+      >
+        <h1>sadsa</h1>
+      </Modal>
       {contacts.length > 0 && (
         <InputSearchContainer>
           <input value={searchTerm} onChange={handleChangeSearchTerm} type="text" placeholder="Pesquise pelo nome" />
