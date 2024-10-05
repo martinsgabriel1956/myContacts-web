@@ -1,11 +1,11 @@
 import {
   useCallback, useEffect, useMemo, useState,
 } from 'react';
-import { Presentation } from './Presentation';
+
 import ContactsService from '../../services/ContactsService';
 import { toast } from '../../utils/toast';
 
-export function Container() {
+export function useHomeController() {
   const [contacts, setContacts] = useState([]);
   const [orderBy, setOrderBy] = useState('asc');
   const [searchTerm, setSearchTerm] = useState('');
@@ -80,26 +80,21 @@ export function Container() {
     }
   }
 
-  return (
-    <Presentation
-      values={{
-        filteredContacts,
-        contacts,
-        searchTerm,
-        hasError,
-        orderBy,
-        isLoading,
-        isDeleteModalVisible,
-        isLoadingDelete,
-      }}
-      actions={{
-        handleChangeSearchTerm,
-        handleTryAgain,
-        handleToggleOrderBy,
-        handleDeleteContact,
-        handleConfirmDeleteContact,
-        handleCloseDeleteModal,
-      }}
-    />
-  );
+  return {
+    isLoading,
+    hasError,
+    contacts,
+    filteredContacts,
+    orderBy,
+    searchTerm,
+    isLoadingDelete,
+    isDeleteModalVisible,
+    contactBeingDeleted,
+    handleTryAgain,
+    handleToggleOrderBy,
+    handleChangeSearchTerm,
+    handleDeleteContact,
+    handleCloseDeleteModal,
+    handleConfirmDeleteContact,
+  };
 }

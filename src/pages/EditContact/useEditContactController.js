@@ -3,9 +3,8 @@ import { useHistory, useParams } from 'react-router-dom';
 import { useSafeAsyncAction } from '../../hooks/useSafeAsyncAction';
 import ContactsService from '../../services/ContactsService';
 import { toast } from '../../utils/toast';
-import { Presentation } from './Presentation';
 
-export function Container() {
+export function useEditContactController() {
   const [isLoading, setIsLoading] = useState(true);
   const [contactName, setContactName] = useState('');
   const contactFormRef = useRef(null);
@@ -56,12 +55,10 @@ export function Container() {
     }
   }
 
-  return (
-    <Presentation
-      contactFormRef={contactFormRef}
-      contactName={contactName}
-      isLoading={isLoading}
-      onSubmit={handleSubmit}
-    />
-  );
+  return {
+    contactName,
+    contactFormRef,
+    isLoading,
+    handleSubmit,
+  };
 }

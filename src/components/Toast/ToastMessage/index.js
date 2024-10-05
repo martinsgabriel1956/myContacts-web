@@ -1,26 +1,16 @@
-import { useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { Container } from './styles';
 
 import xCircleIcon from '../../../assets/images/icons/x-circle.svg';
 import checkCircleIcon from '../../../assets/images/icons/check-circle.svg';
+import { useToastMessageController } from './useToastMessageController';
 
 export function ToastMessage({
   onRemoveMessage, message,
 }) {
-  useEffect(() => {
-    const timeoutId = setTimeout(() => {
-      onRemoveMessage(message.id);
-    }, message.duration || 5000);
-
-    return () => {
-      clearTimeout(timeoutId);
-    };
-  }, [message, onRemoveMessage]);
-
-  function handleRemoveToast() {
-    onRemoveMessage(message.id);
-  }
+  const {
+    handleRemoveToast,
+  } = useToastMessageController(onRemoveMessage, message);
 
   return (
     <Container

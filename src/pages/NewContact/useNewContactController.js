@@ -1,9 +1,8 @@
 import { useRef } from 'react';
 import ContactsService from '../../services/ContactsService';
 import { toast } from '../../utils/toast';
-import { Presentation } from './Presentation';
 
-export function Container() {
+export function useNewContactController() {
   const contactFormRef = useRef(null);
   async function handleSubmit(contact) {
     try {
@@ -21,10 +20,8 @@ export function Container() {
     }
   }
 
-  return (
-    <Presentation
-      contactFormRef={contactFormRef}
-      onSubmit={handleSubmit}
-    />
-  );
+  return {
+    handleSubmit,
+    contactFormRef,
+  };
 }
