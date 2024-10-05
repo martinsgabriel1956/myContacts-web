@@ -7,6 +7,19 @@ class ContactMapper {
       category_id: domainContact.categoryId,
     };
   }
+
+  toDomain(toPersistence) {
+    return {
+      id: toPersistence.id,
+      name: toPersistence.name,
+      email: toPersistence.email,
+      phone: toPersistence.phone,
+      category: {
+        id: toPersistence.category_id,
+        name: toPersistence.category_name,
+      },
+    };
+  }
 }
 
 export default new ContactMapper();
