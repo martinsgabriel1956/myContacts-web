@@ -13,7 +13,7 @@ export function EditContact() {
   const [isLoading, setIsLoading] = useState(true);
   const [contactName, setContactName] = useState('');
   const contactFormRef = useRef(null);
-  const params = useParams();
+  const { id } = useParams();
   const history = useHistory();
   const safeAsyncAction = useSafeAsyncAction();
 
@@ -21,7 +21,7 @@ export function EditContact() {
     async function loadContact() {
       try {
         const contactData = await ContactsService.getContactById(
-          params.id,
+          id,
         );
 
         safeAsyncAction(() => {
@@ -41,18 +41,11 @@ export function EditContact() {
     }
 
     loadContact();
-  }, [params.id, history, safeAsyncAction]);
+  }, [id, history, safeAsyncAction]);
 
-  async function handleSubmit(formData) {
+  async function handleSubmit(contact) {
     try {
-      const contact = {
-        name: formData.name,
-        email: formData.email,
-        phone: formData.phone,
-        category_id: formData.categoryId,
-      };
-
-      const contactData = await ContactsService.updateContact(params.id, contact);
+      const contactData = await ContactsService.updateContact(id, contact);
       setContactName(contactData.name);
 
       toast({
