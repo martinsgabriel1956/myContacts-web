@@ -27,6 +27,7 @@ export function useHomeController() {
       setContacts(contactsList);
     } catch (error) {
       setHasError(true);
+      setContacts([]);
     } finally {
       setIsLoading(false);
     }
