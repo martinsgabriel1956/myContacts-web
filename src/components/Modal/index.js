@@ -2,6 +2,7 @@ import PropTypes from 'prop-types';
 import { Container, Overlay, Footer } from './styles';
 import { Button } from '../Button';
 import { ReactPortal } from '../ReactPortal';
+import { useModalController } from './useModalController';
 
 export function Modal({
   danger,
@@ -14,12 +15,20 @@ export function Modal({
   visible,
   isLoading,
 }) {
-  if (!visible) return null;
+  const { shouldRender, overlayRef } = useModalController(visible);
+
+  if (!shouldRender) return null;
 
   return (
     <ReactPortal>
-      <Overlay>
-        <Container danger={danger}>
+      <Overlay
+        isLeaving={!visible}
+        ref={overlayRef}
+      >
+        <Container
+          danger={danger}
+          isLeaving={!visible}
+        >
           <h1>{title}</h1>
           <div className="modal-body">{children}</div>
           <Footer>

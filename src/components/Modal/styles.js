@@ -18,6 +18,24 @@ const scaleIn = keyframes`
   }
 `;
 
+const fadeOut = keyframes`
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
+`;
+
+const scaleOut = keyframes`
+  from {
+    transform: scale(1);
+  }
+  to {
+    transform: scale(0);
+  }
+`;
+
 export const Overlay = styled.div`
   background: rgba(0, 0, 0, 0.6);
   backdrop-filter: blur(5px);
@@ -32,6 +50,10 @@ export const Overlay = styled.div`
   justify-content: center;
   opacity: 0;
   animation: ${fadeIn} 0.3s forwards;
+
+  ${({ isLeaving }) => isLeaving && css`
+    animation: ${fadeOut} 0.3s forwards;
+  `};
 `;
 
 export const Container = styled.div`
@@ -39,13 +61,17 @@ export const Container = styled.div`
   width: 100%;
   border-radius: 4px;
   padding: 1.5rem;
+
   ${({ theme }) => css`
     background: ${theme.colors.white};
     box-shadow: ${theme.shadow.primary};
-
   `}
 
   animation: ${scaleIn} 0.3s forwards;
+
+  ${({ isLeaving }) => isLeaving && css`
+    animation: ${scaleOut} 0.3s forwards;
+  `};
 
   & > h1 {
     font-size: 1.375rem;
