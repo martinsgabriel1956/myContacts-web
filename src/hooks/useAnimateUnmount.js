@@ -1,8 +1,8 @@
 import { useState, useEffect, useRef } from 'react';
 
-export function useModalController(visible) {
+export function useAnimateUnmount(visible) {
   const [shouldRender, setShouldRender] = useState(false);
-  const overlayRef = useRef(null);
+  const elementRef = useRef(null);
 
   useEffect(() => {
     if (visible) {
@@ -15,9 +15,9 @@ export function useModalController(visible) {
       };
     }
 
-    const overlayRefElement = overlayRef.current;
+    const overlayRefElement = elementRef.current;
 
-    if (!visible && overlayRef.current) {
+    if (!visible && elementRef.current) {
       overlayRefElement.addEventListener('animationend', handleAnimationEnd());
     }
 
@@ -34,6 +34,6 @@ export function useModalController(visible) {
   return {
     shouldRender,
     setShouldRender,
-    overlayRef,
+    elementRef,
   };
 }

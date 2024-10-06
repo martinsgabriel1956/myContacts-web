@@ -2,7 +2,7 @@ import PropTypes from 'prop-types';
 import { Container, Overlay, Footer } from './styles';
 import { Button } from '../Button';
 import { ReactPortal } from '../ReactPortal';
-import { useModalController } from './useModalController';
+import { useAnimateUnmount } from '../../hooks/useAnimateUnmount';
 
 export function Modal({
   danger,
@@ -15,7 +15,7 @@ export function Modal({
   visible,
   isLoading,
 }) {
-  const { shouldRender, overlayRef } = useModalController(visible);
+  const { shouldRender, elementRef: overlayRef } = useAnimateUnmount(visible);
 
   if (!shouldRender) return null;
 
