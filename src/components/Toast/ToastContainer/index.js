@@ -7,6 +7,7 @@ export function ToastContainer() {
     messages,
     handleRemoveMessage,
     pendingRemovalMessagesIds,
+    handleAnimationEnd,
   } = useToastContainerController();
 
   return (
@@ -17,6 +18,7 @@ export function ToastContainer() {
           message={message}
           onRemoveMessage={handleRemoveMessage}
           isLeaving={pendingRemovalMessagesIds.includes(message.id)}
+          onAnimationEnd={handleAnimationEnd}
         />
       ))}
     </Container>

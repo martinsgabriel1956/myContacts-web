@@ -5,17 +5,12 @@ import xCircleIcon from '../../../assets/images/icons/x-circle.svg';
 import checkCircleIcon from '../../../assets/images/icons/check-circle.svg';
 
 export function ToastMessage({
-  onRemoveMessage, message, isLeaving,
+  onRemoveMessage, message, isLeaving, onAnimationEnd,
 }) {
   const {
     handleRemoveToast,
-    elementRef,
-    shouldRender,
-  } = useToastMessageController(onRemoveMessage, message, isLeaving);
-
-  if (!shouldRender) {
-    return null;
-  }
+    animatedElementRef,
+  } = useToastMessageController(onRemoveMessage, message, isLeaving, onAnimationEnd);
 
   return (
     <Container
@@ -24,7 +19,7 @@ export function ToastMessage({
       tabIndex={0}
       role="button"
       isLeaving={isLeaving}
-      ref={elementRef}
+      ref={animatedElementRef}
     >
       {message.type === 'danger' && <img src={xCircleIcon} alt="Error Icon" />}
       {message.type === 'success' && <img src={checkCircleIcon} alt="Success Icon" />}
@@ -42,4 +37,5 @@ ToastMessage.propTypes = {
   }).isRequired,
   onRemoveMessage: PropTypes.func.isRequired,
   isLeaving: PropTypes.bool.isRequired,
+  onAnimationEnd: PropTypes.func.isRequired,
 };
