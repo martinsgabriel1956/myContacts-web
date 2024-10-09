@@ -1,16 +1,21 @@
 import PropTypes from 'prop-types';
 import { Container } from './styles';
-
+import { useToastMessageController } from './useToastMessageController';
 import xCircleIcon from '../../../assets/images/icons/x-circle.svg';
 import checkCircleIcon from '../../../assets/images/icons/check-circle.svg';
-import { useToastMessageController } from './useToastMessageController';
 
 export function ToastMessage({
-  onRemoveMessage, message,
+  onRemoveMessage, message, isLeaving,
 }) {
   const {
     handleRemoveToast,
-  } = useToastMessageController(onRemoveMessage, message);
+    elementRef,
+    shouldRender,
+  } = useToastMessageController(onRemoveMessage, message, isLeaving);
+
+  if (!shouldRender) {
+    return null;
+  }
 
   return (
     <Container
@@ -18,6 +23,8 @@ export function ToastMessage({
       onClick={handleRemoveToast}
       tabIndex={0}
       role="button"
+      isLeaving={isLeaving}
+      ref={elementRef}
     >
       {message.type === 'danger' && <img src={xCircleIcon} alt="Error Icon" />}
       {message.type === 'success' && <img src={checkCircleIcon} alt="Success Icon" />}
@@ -34,4 +41,5 @@ ToastMessage.propTypes = {
     duration: PropTypes.number,
   }).isRequired,
   onRemoveMessage: PropTypes.func.isRequired,
+  isLeaving: PropTypes.bool.isRequired,
 };

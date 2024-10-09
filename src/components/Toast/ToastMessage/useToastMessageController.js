@@ -1,6 +1,8 @@
 import { useEffect } from 'react';
+import { useAnimateUnmount } from '../../../hooks/useAnimateUnmount';
 
-export function useToastMessageController(onRemoveMessage, message) {
+export function useToastMessageController(onRemoveMessage, message, isLeaving) {
+  const { shouldRender, elementRef } = useAnimateUnmount(!isLeaving);
   useEffect(() => {
     const timeoutId = setTimeout(() => {
       onRemoveMessage(message.id);
@@ -17,5 +19,7 @@ export function useToastMessageController(onRemoveMessage, message) {
 
   return {
     handleRemoveToast,
+    shouldRender,
+    elementRef,
   };
 }
