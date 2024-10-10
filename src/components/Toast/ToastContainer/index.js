@@ -1,5 +1,5 @@
 import { Container } from './styles';
-import { ToastMessage } from '../ToastMessage';
+import ToastMessage from '../ToastMessage';
 import { useToastContainerController } from './useToastContainerController';
 
 export function ToastContainer() {
