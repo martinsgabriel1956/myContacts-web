@@ -4,20 +4,19 @@ import { useToastContainerController } from './useToastContainerController';
 
 export function ToastContainer() {
   const {
-    handleAnimationEnd,
     handleRemoveItem,
     renderList,
   } = useToastContainerController();
 
   return (
     <Container>
-      {renderList((message, { isLeaving }) => (
+      {renderList((message, { isLeaving, animatedRef }) => (
         <ToastMessage
           key={message.id}
           message={message}
           onRemoveMessage={handleRemoveItem}
           isLeaving={isLeaving}
-          onAnimationEnd={handleAnimationEnd}
+          animatedRef={animatedRef}
         />
       ))}
     </Container>

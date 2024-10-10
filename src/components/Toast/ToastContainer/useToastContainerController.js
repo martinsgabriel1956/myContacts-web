@@ -4,7 +4,6 @@ import { useAnimatedList } from '../../../hooks/useAnimatedList';
 
 export function useToastContainerController() {
   const {
-    handleAnimationEnd,
     handleRemoveItem,
     items: messages,
     setItems: setMessages,
@@ -34,7 +33,6 @@ export function useToastContainerController() {
   return {
     messages,
     handleRemoveItem,
-    handleAnimationEnd,
     renderList,
   };
 }
