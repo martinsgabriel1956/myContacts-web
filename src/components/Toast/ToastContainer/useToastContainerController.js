@@ -6,9 +6,9 @@ export function useToastContainerController() {
   const {
     handleAnimationEnd,
     handleRemoveItem,
-    pendingRemovalItemsIds,
     items: messages,
     setItems: setMessages,
+    renderList,
   } = useAnimatedList();
 
   useEffect(() => {
@@ -34,7 +34,7 @@ export function useToastContainerController() {
   return {
     messages,
     handleRemoveItem,
-    pendingRemovalItemsIds,
     handleAnimationEnd,
+    renderList,
   };
 }
