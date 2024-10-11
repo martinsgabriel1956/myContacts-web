@@ -1,5 +1,6 @@
 import {
-  useCallback, useEffect, useMemo, useState,
+  useCallback, useEffect, useState,
+  useTransition,
 } from 'react';
 
 import ContactsService from '../../services/ContactsService';
@@ -14,10 +15,12 @@ export function useHomeController() {
   const [isDeleteModalVisible, setIsDeleteModalVisible] = useState(false);
   const [contactBeingDeleted, setContactBeingDeleted] = useState(null);
   const [isLoadingDelete, setIsLoadingDelete] = useState(false);
+  const [filteredContacts, setFilteredContacts] = useState([]);
+  const [isPending, startTransition] = useTransition();
 
-  const filteredContacts = useMemo(() => contacts.filter((contact) => (
-    contact.name.toLowerCase().includes(searchTerm.toLowerCase())
-  )), [contacts, searchTerm]);
+  // const filteredContacts = useMemo(() => contacts.filter((contact) => (
+  //   contact.name.toLowerCase().includes(searchTerm.toLowerCase())
+  // )), [contacts, searchTerm]);
 
   const loadContacts = useCallback(async () => {
     try {
@@ -25,6 +28,7 @@ export function useHomeController() {
       const contactsList = await ContactsService.listContacts(orderBy);
       setHasError(false);
       setContacts(contactsList);
+      setFilteredContacts(contactsList);
     } catch (error) {
       setHasError(true);
       setContacts([]);
@@ -41,18 +45,24 @@ export function useHomeController() {
     loadContacts();
   }
 
-  function handleToggleOrderBy() {
+  const handleToggleOrderBy = useCallback(() => {
     setOrderBy((prevState) => (prevState === 'asc' ? 'desc' : 'asc'));
-  }
+  }, []);
 
   function handleChangeSearchTerm(event) {
-    setSearchTerm(event.target.value);
+    const { value } = event.target;
+    setSearchTerm(value);
+    startTransition(() => {
+      setFilteredContacts(contacts.filter((contact) => (
+        contact.name.toLowerCase().includes(value.toLowerCase())
+      )));
+    });
   }
 
-  function handleDeleteContact(contact) {
+  const handleDeleteContact = useCallback((contact) => {
     setContactBeingDeleted(contact);
     setIsDeleteModalVisible(true);
-  }
+  }, []);
 
   function handleCloseDeleteModal() {
     setIsDeleteModalVisible(false);
@@ -81,6 +91,7 @@ export function useHomeController() {
   }
 
   return {
+    isPending,
     isLoading,
     hasError,
     contacts,

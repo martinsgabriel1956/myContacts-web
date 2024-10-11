@@ -15,6 +15,7 @@ import { Modal } from '../../components/Modal';
 export function Home() {
   const {
     isLoading,
+    isPending,
     hasError,
     contacts,
     filteredContacts,
@@ -58,13 +59,16 @@ export function Home() {
       {(isSearchEmpty) && <SearchNotFound searchTerm={searchTerm} />}
 
       {hasContacts && (
-        <ContactsList
-          filteredContacts={filteredContacts}
-          orderBy={orderBy}
-          onToggleOrderBy={handleToggleOrderBy}
-          onDeleteContact={handleDeleteContact}
-          contactBeingDeleted={contactBeingDeleted}
-        />
+        <>
+          {isPending && <h1>Carregando...</h1>}
+          <ContactsList
+            filteredContacts={filteredContacts}
+            orderBy={orderBy}
+            onToggleOrderBy={handleToggleOrderBy}
+            onDeleteContact={handleDeleteContact}
+            contactBeingDeleted={contactBeingDeleted}
+          />
+        </>
       )}
 
       <Modal
