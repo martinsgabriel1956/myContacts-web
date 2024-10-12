@@ -9,13 +9,12 @@ import {
 import { ErrorStatus } from './components/ErrorStatus';
 import { EmptyList } from './components/EmptyList';
 import { SearchNotFound } from './components/SearchNotFound';
-import { ContactsList } from './components/ContactsList';
+import ContactsList from './components/ContactsList';
 import { Modal } from '../../components/Modal';
 
 export function Home() {
   const {
     isLoading,
-    isPending,
     hasError,
     contacts,
     filteredContacts,
@@ -59,16 +58,13 @@ export function Home() {
       {(isSearchEmpty) && <SearchNotFound searchTerm={searchTerm} />}
 
       {hasContacts && (
-        <>
-          {isPending && <h1>Carregando...</h1>}
-          <ContactsList
-            filteredContacts={filteredContacts}
-            orderBy={orderBy}
-            onToggleOrderBy={handleToggleOrderBy}
-            onDeleteContact={handleDeleteContact}
-            contactBeingDeleted={contactBeingDeleted}
-          />
-        </>
+        <ContactsList
+          filteredContacts={filteredContacts}
+          orderBy={orderBy}
+          onToggleOrderBy={handleToggleOrderBy}
+          onDeleteContact={handleDeleteContact}
+          contactBeingDeleted={contactBeingDeleted}
+        />
       )}
 
       <Modal
