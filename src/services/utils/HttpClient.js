@@ -10,6 +10,7 @@ class HTTPClient {
     return this.makeRequest(path, {
       method: 'GET',
       headers: options?.headers,
+      signal: options?.signal,
     });
   }
 
@@ -55,6 +56,7 @@ class HTTPClient {
       method: options.method,
       headers,
       body: JSON.stringify(options.body),
+      signal: options.signal,
     });
 
     let responseBody;
